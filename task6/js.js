@@ -4,6 +4,7 @@ let tool = 'circle';
 let isDrawing = false;
 let startX, startY;
 let color = '#000';
+let isTextPromptOpen = false;
 
 canvas.addEventListener('mousedown', startDrawing);
 canvas.addEventListener('mousemove', draw);
@@ -38,11 +39,14 @@ function draw(event) {
     ctx.strokeStyle = color;
     ctx.stroke();
   } else if (tool === 'text') {
-    const text = prompt('Enter text:');
-    if (text) {
-      ctx.fillStyle = color;
-      ctx.font = `16px Arial`;
-      ctx.fillText(text, startX, startY);
+    if (!isTextPromptOpen) {
+      isTextPromptOpen = true;
+      const text = prompt('Введите текст:');
+      if (text) {
+        ctx.fillStyle = color;
+        ctx.font = `16px Arial`;
+        ctx.fillText(text, startX, startY);
+      }
     }
   }
 }
