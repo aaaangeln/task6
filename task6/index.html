@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Online Drawing</title>
+  <style>
+    canvas {
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="drawingCanvas" width="1400" height="700"></canvas>
+  <input type="color" id="colorPicker">
+  <button onclick="changeTool('circle')">Circle</button>
+  <button onclick="changeTool('rectangle')">Rectangle</button>
+  <button onclick="changeTool('line')">Line</button>
+  <button onclick="changeTool('text')">Text</button>
+  <script src="js.js"></script>
+</body>
+</html>
