@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Доска для рисования</title>
+</head>
+<body>
+    <canvas id="drawingCanvas" width="1400" height="700"></canvas>
+    <input type="color" id="colorPicker">
+    <button onclick="changeTool('circle')">Circle</button>
+    <button onclick="changeTool('rectangle')">Rectangle</button>
+    <button onclick="changeTool('line')">Line</button>
+    <button onclick="changeTool('text')">Text</button>
+    <button onclick="toggleEraseMode()">Eraser</button>
+    <button onclick="clearCanvas()">Сlear</button>
+    <button onclick="saveDrawing()">Save Drawing</button>
+    <button onclick="goTo()">View Saved Drawing</button>
+    <script src="js.js"></script>
+    <script>
+        window.onload = function() {
+            const savedDrawingData = localStorage.getItem('currentImage');
+            if (savedDrawingData) {
+                const canvas = document.getElementById('drawingCanvas');
+                const ctx = canvas.getContext('2d');
+                const savedDrawingImg = new Image();
+                savedDrawingImg.onload = function() {
+                    ctx.drawImage(savedDrawingImg, 0, 0, canvas.width, canvas.height);
+                };
+                savedDrawingImg.src = savedDrawingData;
+            }
+        };
+    </script>
+</body>
+</html>

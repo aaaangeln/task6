@@ -1,17 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>рисование</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Saved Drawing</title>
 </head>
 <body>
-  <canvas id="drawingCanvas" width="1400" height="700"></canvas>
-  <input type="color" id="colorPicker">
-  <button onclick="changeTool('circle')">Circle</button>
-  <button onclick="changeTool('rectangle')">Rectangle</button>
-  <button onclick="changeTool('line')">Line</button>
-  <button onclick="changeTool('text')">Text</button>
-  <script src="js.js"></script>
+    <div>
+        <h1>Добро пожаловать!</h1>
+        <form onsubmit="submitForm(event)">
+            <label for="name">Введите ваше имя:</label>
+            <input type="text" id="name" required>
+            <br>
+            <input type="submit" value="Отправить">
+        </form>
+    </div>
+    <!-- <button onclick="createNewDrawingPage()">Create New Drawing</button> -->
+    <div id="thumbnailContainer" onclick="navigateToImagePage()"></div>
+    <script src="js.js"></script>
+    <script>
+        window.onload = function() {
+            const savedDrawingData = localStorage.getItem('savedDrawing');
+            if (savedDrawingData) {
+                const thumbnailContainer = document.getElementById('thumbnailContainer');
+                thumbnailContainer.style.backgroundImage = `url(${savedDrawingData})`;
+                thumbnailContainer.style.backgroundSize = 'cover';
+            }
+        };
+
+        function navigateToImagePage() {
+            const savedDrawingData = localStorage.getItem('savedDrawing');
+            if (savedDrawingData) {
+                localStorage.setItem('currentImage', savedDrawingData);
+                window.location.href = 'board.html';
+            }
+        }
+        function createNewDrawingPage() {
+            const newWindow = window.open('board.html');
+            newWindow.onload = function() {
+                
+            };
+        }
+        function submitForm(event) {
+            event.preventDefault();
+            const nameInput = document.getElementById('name');
+            const name = nameInput.value;
+            alert('Привет, ' + name + '!'); 
+            localStorage.setItem('userName', name);
+            window.location.href = 'board.html';
+        }
+    </script>
 </body>
 </html>
+
+
